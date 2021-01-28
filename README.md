@@ -1,6 +1,27 @@
 # dbt-docs-index
 Generates an index of multiple dbt documentation sites
 
+## Build prerequisite css files
+After cloning this repository, run:
+
+```bash
+git submodule update --init --recursive
+```
+
+You'll also need to install bundler if you don't already have it:
+```bash
+gem install bundler
+bundle install
+```
+
+To build the css files:
+
+```bash
+cd styles
+bundle exec jekyll build
+cd -
+```
+
 ## Usage
 
 ```
