@@ -41,13 +41,13 @@
                                         <div class="menu">
                                             <strong>Documentation Sites</strong>
                                             <ul>
-                                            {% for node in tree recursive %}
+                                            {% for name, value in tree.items() recursive %}
                                                 <li class="unselectable">
-                                                    <a class="unselectable active"{% if node.href %} href="{{node.href}}" {% endif %}>
+                                                    <a class="unselectable active"{% if value is string %} href="{{value}}" {% endif %}>
                                                         <span class="filename">
                                                             <span class="filename-normal">
                                                                 <svg class="icn menu-icon-on">
-                                                                    {% if node.href %}
+                                                                    {% if value is string %}
                                                                     <g id="icn-doc"><path d="M9.586,2h0L13,5.414V14H3V2H9.586m0-1H3A1,1,0,0,0,2,2V14a1,1,0,0,0,1,1H13a1,1,0,0,0,1-1V5.414a1,1,0,0,0-.293-.707L10.293,1.293A1,1,0,0,0,9.586,1Z" transform="translate(0 0)"></path><rect x="5" y="11" width="6" height="1" fill="#fff"></rect><polygon points="11 11 5 11 5 12 11 12 11 11 11 11"></polygon><rect x="5" y="9" width="6" height="1" fill="#fff"></rect><polygon points="11 9 5 9 5 10 11 10 11 9 11 9"></polygon><rect x="5" y="7" width="6" height="1" fill="#fff"></rect><polygon points="11 7 5 7 5 8 11 8 11 7 11 7"></polygon><rect x="5" y="4" width="4" height="1" fill="#fff"></rect><polygon points="9 4 5 4 5 5 9 5 9 4 9 4"></polygon></g>
                                                                     {% else %}
                                                                     <g id="icn-dir-on"><path d="M14.878,7H14V5a1,1,0,0,0-1-1H7.414a1,1,0,0,1-.707-.293L5.293,2.293A1,1,0,0,0,4.586,2H1A1,1,0,0,0,0,3V13a1,1,0,0,0,1,1H13.271a1,1,0,0,0,.952-.694l1.607-5A1,1,0,0,0,14.878,7ZM4.586,3,6,4.414A1.986,1.986,0,0,0,7.414,5H13V7H2.979a1,1,0,0,0-.952.694L1,10.889V3Z" transform="translate(0 0)"></path></g>
@@ -55,11 +55,11 @@
                                                                 </svg>
                                                             </span>
                                                             <span class="filename-ellip"></span>
-                                                            <span class="filename-normal">{{ node.name }}</span>
+                                                            <span class="filename-normal">{{ name }}</span>
                                                         </span>
                                                     </a>
-                                                    {% if node.children %}
-                                                        <ul>{{ loop(node.children) }}</ul>
+                                                    {% if value is not string %}
+                                                        <ul>{{ loop(value.items()) }}</ul>
                                                     {% endif %}
                                                 </li>
                                             {% endfor %}
