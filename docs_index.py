@@ -19,7 +19,7 @@ TEST_TREE = {
 }
 
 def contents(path: str):
-    with open(path, 'r', encoding='utf-8') as f:
+    with open(PurePath(sys.path[0], path), 'r', encoding='utf-8') as f:
         return f.read()
 
 if __name__ == '__main__':
