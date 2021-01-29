@@ -33,7 +33,7 @@ if __name__ == '__main__':
             dpath.util.new(tree, relative_path.parts, str(url))
             del dirnames[:] # Don't look for dbt projects inside dbt projects
     print(tree)
-    env = Environment(loader = FileSystemLoader(searchpath="."))
+    env = Environment(loader = FileSystemLoader(searchpath=sys.path[0]))
     template = env.get_template('docs-index.html')
     with open(PurePath(root, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(

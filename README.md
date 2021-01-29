@@ -8,10 +8,9 @@ After cloning this repository, run:
 git submodule update --init --recursive
 ```
 
-You'll also need to install bundler if you don't already have it:
+You'll also need to install jekyll and bundler if you don't already have them:
 ```bash
-gem install bundler
-bundle install
+gem install jekyll bundler
 ```
 
 To build the css files:
