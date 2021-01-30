@@ -18,8 +18,8 @@ TEST_TREE = {
     'Top-Level Model': 'mt',
 }
 
-def contents(path: str):
-    with open(PurePath(sys.path[0], path), 'r', encoding='utf-8') as f:
+def contents(pkg_root: PurePath, path: str):
+    with open(PurePath(pkg_root, path), 'r', encoding='utf-8') as f:
         return f.read()
 
 if __name__ == '__main__':
@@ -33,12 +33,15 @@ if __name__ == '__main__':
             dpath.util.new(tree, relative_path.parts, str(url))
             del dirnames[:] # Don't look for dbt projects inside dbt projects
     print(tree)
-    env = Environment(loader = FileSystemLoader(searchpath=sys.path[0]))
+    pkg_root = PurePath(sys.argv[0]).parent
+    env = Environment(loader = FileSystemLoader(searchpath=pkg_root))
+    index_file = PurePath(root, 'index.html')
+    print(f'Writing index to {index_file}')
     template = env.get_template('docs-index.html')
-    with open(PurePath(root, 'index.html'), 'w', encoding='utf-8') as f:
+    with open(index_file, 'w', encoding='utf-8') as f:
         f.write(
             template.render(
-                css=contents('styles/_site/ui/css/styles.css'),
+                css=contents(pkg_root, 'styles/_site/ui/css/styles.css'),
                 tree=tree,
                 )
             )
