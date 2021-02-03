@@ -1,0 +1,7 @@
+*
+!Gemfile
+!styles
+styles/_site
+!requirements.txt
+!*.py
+!*.html

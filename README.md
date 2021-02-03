@@ -1,32 +1,33 @@
 # dbt-docs-index
 Generates an index of multiple dbt documentation sites
 
-## Build prerequisite css files
+## Prep
 After cloning this repository, run:
 
 ```bash
 git submodule update --init --recursive
 ```
 
-You'll also need to install jekyll and bundler if you don't already have them:
-```bash
-gem install jekyll bundler
-```
-
-To build the css files:
-
-```bash
-cd styles
-bundle exec jekyll build
-cd -
-```
-
-## Usage
+## Docker Usage
 
 ```
-python docs_index.py [ROOT DIRECTORY]
+docker build -t dbt_index_builder .
+docker run --rm -v [ROOT DIRECTORY]:/projects dbt_index_builder /projects
 ```
 
 generates a file index.html in the root directory with a directory listing of your dbt projects:
 
 ![menu of dbt docs sites](/etc/screenshot.png?raw=true "dbt-docs-index screenshot")
+
+## Native Usage
+
+Do everything like it's done in the Dockerfile:
+ * Install Ruby, bundler, Jekyll.
+ * Generate `styles.css`
+ * Install Python dependencies
+
+Then run:
+
+```
+python docs_index.py [ROOT DIRECTORY]
+```
